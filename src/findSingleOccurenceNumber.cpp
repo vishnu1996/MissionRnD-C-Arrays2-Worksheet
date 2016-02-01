@@ -13,6 +13,33 @@ ERROR CASES: Return -1 for invalid inputs.
 NOTES:
 */
 
-int findSingleOccurenceNumber(int *A, int len) {
-	return -1;
+int findSingleOccurenceNumber(int *A, int len) //This function works well for given spec
+{
+	int i, sum = 0, temp;
+	if (A == nullptr)
+		return -1;
+	for (i = 0; i < len; i++)
+		sum += A[i];
+	for (i = 0; i < len; i++)
+	{
+		if ((sum - A[i]) % 3 == 0)
+		{
+			temp = A[i];
+			for (i; i < len - 1; i++)
+			{
+				if (A[i + 1] == temp)
+				{
+					for (i; i < len - 2; i++)
+					{
+						if (A[i + 2] != temp && ((sum - A[i + 2]) % 3 == 0))
+							return A[i + 2];
+					}
+				}
+			}
+			return temp;
+		}
+	}
 }
+
+
+//if the above function doesn't work for any other case apart from spec, then the logic would be to sort and check i-1,i,i+1 elements to find unique element.

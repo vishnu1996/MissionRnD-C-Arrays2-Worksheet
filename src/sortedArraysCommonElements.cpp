@@ -16,12 +16,86 @@ NOTES:
 
 #include <iostream>
 
-struct transaction {
+struct transaction
+{
 	int amount;
 	char date[11];
 	char description[20];
 };
 
-struct transaction * sortedArraysCommonElements(struct transaction *A, int ALen, struct transaction *B, int BLen) {
-	return NULL;
+
+struct transaction * sortedArraysCommonElements(struct transaction *A, int ALen, struct transaction *B, int BLen)
+{
+	struct transaction *result;
+	int iter1 = 0, iter2 = 0, iter3 = 0, found = 1, count = 0;
+	if (A == NULL || B == NULL)
+		return NULL;
+	result = (struct transaction*)malloc(ALen*(sizeof(struct transaction)));
+	while (iter1 < ALen && iter2 < BLen)
+	{
+		while (iter2 < BLen)
+		{
+			found = 1;
+			for (iter3 = 0; iter3 < 11; iter3++)
+			{
+				if (A[iter1].date[iter3] != B[iter2].date[iter3])
+				{
+					found = 0;		break;
+				}
+			}
+			if (found == 1)
+			{
+				result[count] = B[iter2];
+				count += 1;
+			}
+			else
+				break;
+			iter2++;
+
+		}
+		iter1++;
+	}
+	if (count == 0)
+		return NULL;
+	else
+		return result;
 }
+
+
+/*
+
+struct transaction *result;
+int iter1 = 0, iter2 = 0, iter3 = 0, found = 1, count = 0;
+if (A == NULL || B == NULL)
+return NULL;
+result = (struct transaction*)malloc(ALen*(sizeof(struct transaction)));
+while (iter1 < ALen || iter2 < BLen)
+{
+	while (iter2 < BLen)
+	{
+		found = 1;
+		for (iter3 = 0; iter3 < 11; iter3++)
+		{
+			if (A[iter1].date[iter3] != B[iter2].date[iter3])
+			{
+				found = 0;		break;
+			}
+		}
+		if (found == 1)
+		{
+			result[count] = B[iter2];
+			count += 1;
+
+		}
+		else
+			break;
+		iter2++;
+	}
+	iter1++;
+}
+if (count == 0)
+return NULL;
+else
+return result;
+
+*/
