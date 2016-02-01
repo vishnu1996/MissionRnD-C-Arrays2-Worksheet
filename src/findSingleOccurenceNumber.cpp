@@ -13,7 +13,7 @@ ERROR CASES: Return -1 for invalid inputs.
 NOTES:
 */
 
-int findSingleOccurenceNumber(int *A, int len) //This function works well for given spec
+int findSingleOccurenceNumber(int *A, int len) //This function works well for given spec in order of n i.e., O(n)
 {
 	int i, sum = 0, temp;
 	if (A == nullptr)
